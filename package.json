@@ -1,0 +1,28 @@
+{
+  "name": "angular-testing",
+  "version": "1.0.0",
+  "description": "Angular testing example using a simple todo app.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Noel Felix",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-ui-router": "^0.3.2",
+    "bcrypt": "^0.8.7",
+    "body-parser": "^1.15.2",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "jsonwebtoken": "^7.1.9",
+    "moment": "^2.16.0",
+    "node": "0.0.0",
+    "sequelize": "^3.27.0",
+    "sqlite3": "^3.1.8"
+  },
+  "devDependencies": {
+    "lodash": "^4.17.2",
+    "morgan": "^1.7.0"
+  }
+}
