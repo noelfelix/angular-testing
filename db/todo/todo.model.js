@@ -1,24 +1,16 @@
 const Sequelize = require('sequelize');
-const User = require('../user/user.model');
 
 module.exports = (sequelize) => {
-  return sequelize.define('todo', {
+  let Todo = sequelize.define('todo', {
     task: {
       type: Sequelize.STRING,
-      allowNull: false,
-      primaryKey: true
-    },
-    user: {
-      type:Sequelize.STRING,
-      references: {
-        model: User,
-        key: 'username'
-      }
+      allowNull: false
     },
     completed: {
       type: Sequelize.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
       defaultValue: false
     }
   });
+  return Todo;
 };

@@ -1,17 +1,21 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('todo', null, null, {
+const db = new Sequelize('angular-testing', null, null, {
    dialect: 'sqlite',
     pool: {
      min: 0,
       max: 10,
       idle: 10000
     },
-    storage: 'todo.sqlite'
+    storage: 'angular-testing.sqlite'
 });
 
-const Todo = require('./todo/todo.model');
-const User = require('./user/user.model');
+let Todo = require('./todo/todo.model')(db);
+let User = require('./user/user.model')(db);
+
+Todo.belongsTo(User);
+
+db.sync();
 
 module.exports = {
   Todo: Todo,

@@ -18,13 +18,13 @@ module.exports = (app, express) => {
     if (token) {
       jwt.verify(token, process.env.SECRET, (err) => {
         if (err) {
-          res.redirect("/user/");
+          res.redirect("/");
         } else {
           next();
         }
       });
     } else {
-      res.redirect("/user/");
+      res.redirect("/");
     }
   });
 

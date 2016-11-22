@@ -6,7 +6,7 @@ const constants = require('../../constants'),
 module.exports = {
   createUser: newUser => {
     return new Promise((res, rej) => {
-        db.User.findOne({where: {username: username}})
+        db.User.findOne({where: {username: newUser.username}})
         .then(user => {
           if (user) {
             rej(new Error(constants.USERNAME_TAKEN_ERROR_MESSAGE));
@@ -16,7 +16,8 @@ module.exports = {
                 newUser.password = saltedHash;
                 db.User.create(newUser)
                   .then(createdUser => {
-                    res(createdUser);
+                    delete createdUser.dataValues.password;
+                    res(createdUser.dataValues);
                   });
               }, err => {
                 rej(err);
@@ -54,8 +55,8 @@ module.exports = {
               if (err) {
                 rej(err)
               } else if (match) {
-                delete user.password;
-                res(user);
+                delete user.dataValues.password;
+                res(user.dataValues);
               } else {
                 rej(constants.INCORRECT_PASSWORD_MESSAGE);
               }

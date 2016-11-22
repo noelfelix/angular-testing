@@ -1,13 +1,11 @@
-const constants = require('../../constants'),
-      helpers   = require('../helpers'),
-      db        = require('../db');
+const db = require('../db');
 
 module.exports = {
   createTodo: newTodo => {
     return new Promise((res, rej) => {
       db.Todo.create(newTodo)
         .then(createdTodo => {
-          res(createdTodo);
+          res(createdTodo.dataValues);
         }, err => {
           rej(err);
         });
@@ -15,7 +13,7 @@ module.exports = {
   },
   retrieveTodos: username => {
     return new Promise((res, rej) => {
-      db.Todo.findAll({where: {username: username}})
+      db.Todo.findAll({where: {userUsername: username}})
         .then(todos => {
           res(todos);
         }, err => {
@@ -27,18 +25,20 @@ module.exports = {
     return new Promise((res, rej) => {
       db.Todo.update(status, {where: {id: id}})
         .then(data => {
-          res(data);
+          res.status(204).send();
         }, err => {
           rej(err);
         });
     });
   },
   deleteTodo: id => {
-    db.Todo.destroy({where: {id: id}})
-      .then(data => {
-        res(data);
-      }, err => {
-        rej(err);
-      });
+    return new Promise((res, rej) => {
+      db.Todo.destroy({where: {id: id}})
+        .then(data => {
+          res.status(204).send();
+        }, err => {
+          rej(err);
+        });
+    });
   }
 };

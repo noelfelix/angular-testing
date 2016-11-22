@@ -16,11 +16,13 @@
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "jsonwebtoken": "^7.1.9",
+    "moment": "^2.16.0",
     "node": "0.0.0",
     "sequelize": "^3.27.0",
     "sqlite3": "^3.1.8"
   },
   "devDependencies": {
+    "lodash": "^4.17.2",
     "morgan": "^1.7.0"
   }
 }
