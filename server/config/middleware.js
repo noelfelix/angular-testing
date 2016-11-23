@@ -33,7 +33,7 @@ module.exports = (app, express) => {
     }
   });
 
-  app.use('/todo', todoRouter);
+  app.use('/todos', todoRouter);
   app.use('/user', userRouter);
 
   require('../todo/todo.routes.js')(todoRouter);

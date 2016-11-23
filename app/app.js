@@ -1,26 +1,13 @@
 import angular from 'angular';
-import angularStorage from 'angular-storage';
 import uiRouter from 'angular-ui-router';
-import httpAuthInterceptor from './config/httpAuthInterceptor';
-import constants from './config/constants';
+import ngStorage from 'angular-storage';
+import ngMaterial from 'angular-material';
+import ngAnimate from 'angular-animate';
+import ngAria from 'angular-aria';
+
+import config from './config/config'
 
 (() => {
-  const ngModule = angular.module('todoApp', [uiRouter, angularStorage]);
-
-  httpAuthInterceptor(ngModule);
-
-  ngModule.constant('CONSTANTS', constants);
-
-  ngModule.config(($stateProvider, $urlRouterProvider, $httpProvider, $http) => {
-    $urlRouterProvider.otherwise('/');
-
-    $stateProvider
-      .state('todo', {
-        url: '/todo',
-        templateUrl: '/todo.template.html',
-        controller: 'todoController as vm'
-      });
-
-    $httpProvider.interceptors.push('httpAuthInterceptor');
-  });
+  const ngModule = angular.module('todoApp', [uiRouter, ngStorage, ngAnimate, ngAria, ngMaterial]);
+  config(ngModule);
 })();
