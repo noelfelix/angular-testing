@@ -1,4 +1,4 @@
-const constants = require('../../constants'),
+const constants = require('../../server/constants'),
       helpers   = require('../helpers'),
       bcrypt    = require('bcrypt'),
       db        = require('../db');
