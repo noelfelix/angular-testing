@@ -1,9 +1,7 @@
-const Todo      = require('../../db/todo/todo.controller'),
-      constants = require('../../constants');
+const Todo = require('../../db/todo/todo.controller');
 
 module.exports = {
   createTodo: (req, res) => {
-    console.log(req.body)
     Todo.createTodo(req.body)
       .then(todo => {
         res.status(201).json({

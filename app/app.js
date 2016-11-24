@@ -1,14 +1,26 @@
+import angular from 'angular';
+import uiRouter from 'angular-ui-router';
+import ngStorage from 'angular-storage';
+import ngMaterial from 'angular-material';
+import ngAnimate from 'angular-animate';
+import ngAria from 'angular-aria';
+
+import httpAuthInterceptor from './config/interceptors/httpAuthInterceptor';
+import login from './login/index';
+import todos from './todos/index';
+import todo from './todos/todo/index';
+import services from './services/index';
+
+import config from './config/config'
+
 (() => {
-  const ngModule = angular.module('todoApp', ['ui.router']);
+  const ngModule = angular.module('todoApp', [uiRouter, ngStorage, ngAnimate, ngAria, ngMaterial]);
 
-  ngModule.config(($stateProvider, $urlRouterProvider) => {
-    $urlRouterProvider.otherwise('/');
+  httpAuthInterceptor(ngModule);
+  services(ngModule);
+  login(ngModule);
+  todos(ngModule);
+  todo(ngModule);
 
-    $stateProvider
-      .state('todo', {
-        url: '/todo',
-        templateUrl: '/todo.template.html',
-        controller: 'todoController as vm'
-      });
-  });
+  config(ngModule);
 })();

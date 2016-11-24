@@ -1,6 +1,7 @@
-const User      = require('../../db/user/user.controller'),
-      jwt       = require('jsonwebtoken'),
-      constants = require('../../constants');
+const constants = require('../constants'),
+      User      = require('../../db/user/user.controller'),
+      jwt       = require('jsonwebtoken');
+
 
 module.exports = {
   signup: (req, res) => {
