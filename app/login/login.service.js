@@ -3,7 +3,6 @@ export default ngModule => {
 
   class loginService {
     constructor($http, CONSTANTS, sessionService) {
-      consle.log('DQWDQDQWDQWDQWDWQ')
       this.$http = $http;
 
       this.CONSTANTS = CONSTANTS;

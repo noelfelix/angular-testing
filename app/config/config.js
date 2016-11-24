@@ -1,14 +1,7 @@
-import httpAuthInterceptor from './interceptors/httpAuthInterceptor';
+
 import constants from './constants';
 
-import login from '../login/index';
-import todos from '../todos/index';
-import todo from '../todos/todo/index';
-import services from '../services/index';
-
 export default ngModule => {
-  httpAuthInterceptor(ngModule);
-  services(ngModule);
 
   ngModule.constant('CONSTANTS', constants);
 
@@ -28,9 +21,5 @@ export default ngModule => {
       });
 
     $httpProvider.interceptors.push('httpAuthInterceptor');
-
-    login(ngModule);
-    todos(ngModule);
-    todo(ngModule);
   });
 }
