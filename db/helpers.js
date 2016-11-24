@@ -1,5 +1,5 @@
 const db      = require('./db'),
-      bcrypt  = require('bcrypt');
+      bcrypt  = require('bcryptjs');
 
 module.exports = {
   findUser: username => {

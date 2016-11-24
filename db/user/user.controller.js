@@ -1,6 +1,6 @@
 const constants = require('../../constants'),
       helpers   = require('../helpers'),
-      bcrypt    = require('bcrypt'),
+      bcrypt    = require('bcryptjs'),
       db        = require('../db');
 
 module.exports = {
