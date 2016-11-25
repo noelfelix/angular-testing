@@ -7,10 +7,7 @@ module.exports = {
       {
         test: /\.js$/,
         include: /app/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015']
-        }
+        loaders: ['babel-loader?presets[]=es2015']
       }
     ]
   }

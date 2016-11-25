@@ -1,5 +1,6 @@
 const constants = require('../constants'),
       User      = require('../../db/user/user.controller'),
+      Todo      = require('../../db/todo/todo.controller'),
       jwt       = require('jsonwebtoken');
 
 
@@ -11,7 +12,7 @@ module.exports = {
           user: user,
           success: true
         };
-        data.token = jwt.sign({user: user.username}, process.env.SECRET, {expiresIn: '48h'});
+        data.token = jwt.sign({username: user.username}, process.env.SECRET, {expiresIn: '48h'});
         res.status(201).json(data);
       }, err => {
         err.success = false;
@@ -19,14 +20,20 @@ module.exports = {
       });
   },
   signin: (req, res) => {
-    User.signin(req.params.username, req.body.password)
+    User.getUser(req.params.username, req.body.password)
       .then(data => {
-        data.success = true;
-        data.token = jwt.sign({user: data.user.username}, process.env.SECRET, {expiresIn: '48h'});
-        res.json(data);
+        Todo.retrieveTodos(data.username)
+          .then(todos => {
+            data.todos = todos;
+            data.success = true;
+            data.token = jwt.sign({user: data.username}, process.env.SECRET, {expiresIn: '48h'});
+            res.json(data);
+          }, err => {
+            res.status(500).json(err);
+          });
       }, err => {
         err.success = false;
-        err.message == constants.USER_NOT_FOUND_MESSAGE || err.message == constants.INCORRECT_PASSWORD_MESSAGE ? res.status(400).json(err) : res.status(500).json(err);
+        err == constants.USER_NOT_FOUND_MESSAGE || err == constants.INCORRECT_PASSWORD_MESSAGE ? res.status(400).json(err) : res.status(500).json(err);
       });
   }
 };

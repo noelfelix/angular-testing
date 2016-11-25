@@ -1,19 +1,18 @@
 <div id="login-main" flex="100" layout="row" layout-align="center center">
-  <md-content layout-padding>
-    <div layout="column" flex="60">
-      <div flex="100" layout="row">
-        <form name="loginForm">
-          <md-input-container class="md-block" flex="40">
-            <label>Username</label>
-            <input required ng-model="vm.username">
-          </md-input-container>
-          <md-input-container class="md-block" flex="40">
-            <label>Password</label>
-            <input required ng-model="vm.password">
-          </md-input-container>
-        </form>
-      </div>
-      <md-button ng-click="vm.loginService.login(vm.username, vm.password)" flex="100" class="md-raised md-primary">Login</md-button>
+  <md-content layout-padding flex-layout="column" flex="60">
+    <form name="loginForm" flex="100" layout-align="space-between center" layout="row">
+      <md-input-container class="md-block" flex="40">
+        <label>Username</label>
+        <input required ng-model="vm.username">
+      </md-input-container>
+      <md-input-container class="md-block" flex="40">
+        <label>Password</label>
+        <input required ng-model="vm.password">
+      </md-input-container>
+    </form>
+    <div flex="100" flex-layout="row" layout-align="center end">
+      <md-button ng-click="vm.loginService.login(vm.username.toLowerCase(), vm.password.toLowerCase())" class="md-raised md-primary">Login</md-button>
+      <md-button ng-click="vm.loginService.register(vm.username.toLowerCase(), vm.password.toLowerCase())" class="md-raised md-primary">Signup</md-button>
     </div>
   </md-content>
 </div>

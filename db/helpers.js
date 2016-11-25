@@ -1,5 +1,4 @@
-const db      = require('./db'),
-      bcrypt  = require('bcryptjs');
+const bcrypt    = require('bcryptjs');
 
 module.exports = {
   hashPassword: password => {

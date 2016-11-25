@@ -3,7 +3,15 @@ export default ngModule => {
 
   class todosService {
     constructor() {
+      this._todos = [];
+    }
 
+    set todos(todos) {
+      this._todos = todos;
+    }
+
+    get todos() {
+      return this._todos;
     }
   }
 

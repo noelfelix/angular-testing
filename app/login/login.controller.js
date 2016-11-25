@@ -2,13 +2,15 @@ export default ngModule => {
   let controllerName = 'loginController';
 
   class loginController {
-    constructor(loginService) {
-      this.loginService = loginService;
+    constructor(userService) {
+      this.userService = userService;
+
       this.username;
       this.password;
+
+      this.userService.onInitialLoad();
     }
   }
 
-  console.log(ngModule)
   ngModule.controller(controllerName, loginController);
 };

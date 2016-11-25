@@ -5,7 +5,7 @@ import ngMaterial from 'angular-material';
 import ngAnimate from 'angular-animate';
 import ngAria from 'angular-aria';
 
-import httpAuthInterceptor from './config/interceptors/httpAuthInterceptor';
+import interceptors from './config/interceptors/index';
 import login from './login/index';
 import todos from './todos/index';
 import todo from './todos/todo/index';
@@ -16,7 +16,7 @@ import config from './config/config'
 (() => {
   const ngModule = angular.module('todoApp', [uiRouter, ngStorage, ngAnimate, ngAria, ngMaterial]);
 
-  httpAuthInterceptor(ngModule);
+  interceptors(ngModule);
   services(ngModule);
   login(ngModule);
   todos(ngModule);

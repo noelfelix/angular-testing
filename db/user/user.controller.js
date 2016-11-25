@@ -20,28 +20,12 @@ module.exports = {
                     res(createdUser.dataValues);
                   });
               }, err => {
+                console.log(err)
                 rej(err);
               });
           }
         }, err => {
-          rej(err);
-        });
-    });
-  },
-  signin: (username, password) => {
-    return new Promise((res, rej) => {
-      this.getUser(username, password)
-        .then(user => {
-          db.Todo.getTodosByUser(user.username)
-            .then(todos => {
-              res({
-                user: user,
-                todos: todos
-              });
-            }, err => {
-              rej(err);
-            })
-        }, err => {
+          console.log(err)
           rej(err);
         });
     });
@@ -49,24 +33,24 @@ module.exports = {
   getUser: (username, password) => {
     return new Promise((res, rej) => {
       db.User.findOne({where: {username: username}})
-        .then(user => {
-          if (user) {
-            bcrypt.compare(password, user.password, (err, match) => {
-              if (err) {
-                rej(err)
-              } else if (match) {
-                delete user.dataValues.password;
-                res(user.dataValues);
-              } else {
-                rej(constants.INCORRECT_PASSWORD_MESSAGE);
-              }
-            });
-          } else {
-            rej(constants.USER_NOT_FOUND_MESSAGE);
-          }
-        }, err => {
-          rej(err);
-        });
+          .then(user => {
+            if (user) {
+              bcrypt.compare(password, user.password, (err, match) => {
+                if (err) {
+                  rej(err)
+                } else if (match) {
+                  delete user.dataValues.password;
+                  res(user.dataValues);
+                } else {
+                  rej(constants.INCORRECT_PASSWORD_MESSAGE);
+                }
+              });
+            } else {
+              rej(constants.USER_NOT_FOUND_MESSAGE);
+            }
+          }, err => {
+            rej(err);
+          });
     });
   }
 };

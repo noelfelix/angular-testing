@@ -3,7 +3,6 @@ export default ngModule => {
 
   class sessionService {
     constructor(store, CONSTANTS) {
-      console.log("EWGHSHTR")
       this.CONSTANTS = CONSTANTS;
       this.store = store;
 
@@ -14,7 +13,10 @@ export default ngModule => {
 
     init() {
       this.currentSessionToken = this.retrieveSession();
-      console.log(this.currentSessionToken)
+    }
+
+    getCurrentSessionUser () {
+      return _parseJwt(this.currentSessionToken).username;
     }
 
     storeSession (token) {
@@ -24,6 +26,10 @@ export default ngModule => {
 
     retrieveSession() {
       return this.store.get(this.CONSTANTS.JWT_TOKEN_KEY);
+    }
+
+    removeSession() {
+      this.store.remove(this.CONSTANTS.JWT_TOKEN_KEY);
     }
 
     isAuthenticated() {
@@ -42,6 +48,6 @@ export default ngModule => {
   let _parseJwt = function(token) {
     let base64Data = token.split('.')[1];
     let base64 = base64Data.replace('-', '+').replace('_', '/');
-    return JSON.parse(this.$window.atob(base64));
+    return JSON.parse(window.atob(base64));
   }.bind(sessionService);
 }

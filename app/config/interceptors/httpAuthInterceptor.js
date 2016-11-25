@@ -2,22 +2,25 @@ export default ngModule => {
 
   let providerName = 'httpAuthInterceptor';
 
-  class httpAuthInterceptor {
-    constructor($controller, sessionService) {
-      this.$controller = $controller;
-      this.sessionService = sessionService;
-    }
+  function httpAuthInterceptor(sessionService) {
+    return {
+      request: (config) => {
+        let token = sessionService.retrieveSession();
+        if (token) {
+          config.headers['X-Access-Token'] = token;
+        }
+        return config;
+      },
 
-    request (config) {
-      console.log(config);
-      return config;
-    }
-
-    response (res) {
-      console.log(res);
-      return res;
+      response: (res) => {
+        let token = res.data.token;
+        if (token) {
+          sessionService.storeSession(token);
+        }
+        return res;
+      }
     }
   }
 
-  ngModule.service(providerName, httpAuthInterceptor);
-}
+  ngModule.factory(providerName, httpAuthInterceptor);
+};
