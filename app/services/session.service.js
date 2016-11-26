@@ -6,17 +6,13 @@ export default ngModule => {
       this.CONSTANTS = CONSTANTS;
       this.store = store;
 
-      this.currentSessionToken;
-
-      this.init();
-    }
-
-    init() {
       this.currentSessionToken = this.retrieveSession();
     }
 
     getCurrentSessionUser () {
-      return _parseJwt(this.currentSessionToken).username;
+      if (this.currentSessionToken) {
+        return _parseJwt(this.currentSessionToken).username;
+      }
     }
 
     storeSession (token) {

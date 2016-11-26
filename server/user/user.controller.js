@@ -26,7 +26,7 @@ module.exports = {
           .then(todos => {
             data.todos = todos;
             data.success = true;
-            data.token = jwt.sign({user: data.username}, process.env.SECRET, {expiresIn: '48h'});
+            data.token = jwt.sign({username: data.username}, process.env.SECRET, {expiresIn: '48h'});
             res.json(data);
           }, err => {
             res.status(500).json(err);

@@ -2,8 +2,8 @@ export default ngModule => {
   let controllerName = 'todoController';
 
   class todoController {
-    constructor() {
-
+    constructor(todosService) {
+      this.todosService = todosService;
     }
   }
 

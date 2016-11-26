@@ -5,6 +5,7 @@ import ngMaterial from 'angular-material';
 import ngAnimate from 'angular-animate';
 import ngAria from 'angular-aria';
 
+import components from './components/index';
 import interceptors from './config/interceptors/index';
 import login from './login/index';
 import todos from './todos/index';
@@ -16,6 +17,7 @@ import config from './config/config'
 (() => {
   const ngModule = angular.module('todoApp', [uiRouter, ngStorage, ngAnimate, ngAria, ngMaterial]);
 
+  components(ngModule);
   interceptors(ngModule);
   services(ngModule);
   login(ngModule);

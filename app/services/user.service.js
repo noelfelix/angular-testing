@@ -1,22 +1,24 @@
 export default ngModule => {
-  let providerName = 'loginService';
+  let providerName = 'userService';
 
   class userService {
-    constructor($http, $state, CONSTANTS, sessionService, todosService) {
+    constructor($http, $state, CONSTANTS, sessionService) {
       this.$http = $http;
       this.$state = $state;
 
       this.CONSTANTS = CONSTANTS;
       this.sessionService = sessionService;
-      this.todosService = todosService;
 
+      this.currentUser;
       this.userEndpoint = CONSTANTS.USER_ENDPOINT;
+
+      if(this.sessionService.isAuthenticated()) {
+        this.currentUser = this.sessionService.getCurrentSessionUser();
+        this.$state.go('todos');
+      }
     }
 
     onInitialLoad() {
-      if(this.sessionService.isAuthenticated()) {
-        this.$state.go('todos');
-      }
     }
 
     register(username, password) {
@@ -29,6 +31,7 @@ export default ngModule => {
         }
       }).then(res => {
         console.log(res);
+        this.currentUser = this.sessionService.getCurrentSessionUser();
         this.$state.go('todos');
       }, err => {
         console.error(err);
@@ -43,6 +46,7 @@ export default ngModule => {
           password: password
         }
       }).then(res => {
+        this.currentUser = this.sessionService.getCurrentSessionUser();
         this.$state.go('todos', {
           todos: res.data.todos
         });
@@ -53,6 +57,7 @@ export default ngModule => {
 
     logout() {
       this.sessionService.removeSession();
+      this.currentUser = undefined;
       if (this.$state.current.name != 'login') {
         this.$state.go('login');
       }

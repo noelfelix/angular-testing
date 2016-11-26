@@ -5,7 +5,9 @@ export default ngModule => {
     constructor(userService, todosService) {
       this.userService = userService;
       this.todosService = todosService;
-      this.newTodoItem = {};
+      this.newTodoItem = {
+        task: ""
+      };
     }
   }
 

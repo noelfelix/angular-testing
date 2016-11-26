@@ -7,8 +7,6 @@ export default ngModule => {
 
       this.username;
       this.password;
-
-      this.userService.onInitialLoad();
     }
   }
 

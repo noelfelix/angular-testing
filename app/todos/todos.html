@@ -1,2 +1,21 @@
-THIS IS TODOS
-<md-button class="md-primary md-raised" ng-click="vm.loginService.logout()">logout</md-button>
+<div id="todos-main">
+  <div class="title">Creat Todo</div>
+  <form name="todoForm" flex="100" layout-align="space-between center" layout="row">
+    <md-input-container class="md-block">
+      <label>Task</label>
+      <input required ng-model="vm.task" placeholder="Enter task"></input>
+    </md-input-container>
+    <md-button ng-click="vm.todosService.createTodo()" class="md-raised md-primary">Create</md-button>
+  </form>
+  <div ng-if="vm.unfinishedTodos.length">
+    <div class="title">Unfinished Tasks</div>
+    <md-divider></md-divider>
+    <todo ng-repeat="todo in vm.unfinishedTodos" todo="todo"></todo>
+    <md-divider></md-divider>
+  </div>
+  <div ng-if="vm.completedTodos.length">
+    <div class="title">Completed Tasks</div>
+    <md-divider></md-divider>
+    <todo ng-repeat="todo in vm.completedTodos" todo="todo"></todo>
+  </div>
+</div>

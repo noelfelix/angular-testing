@@ -1,0 +1,5 @@
+<header>
+  <span ng-if="!vm.userService.currentUser">Welcome to Todo App!  Login or signup below.</span>
+  <span ng-if="vm.userService.currentUser">Welcome back, {{vm.userService.currentUser}}.</span>
+  <md-button ng-if="vm.userService.currentUser" class="md-primary md-raised" ng-click="vm.userService.logout()">logout</md-button>
+</header>
