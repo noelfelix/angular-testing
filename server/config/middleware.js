@@ -14,7 +14,6 @@ module.exports = (app, express) => {
   app.use(express.static(path.normalize(__dirname + '/../../')));
 
   app.use((req, res, next) => {
-    console.log(req)
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Credentials", "true");
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
@@ -27,6 +26,7 @@ module.exports = (app, express) => {
   });
 
   todoRouter.use((req, res, next) => {
+    console.log(req.headers)
     const token = req.body.token || req.query.token || req.headers['X-Access-Token'];
 
     if (token) {
