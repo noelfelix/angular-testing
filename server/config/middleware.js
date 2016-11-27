@@ -26,19 +26,22 @@ module.exports = (app, express) => {
   });
 
   todoRouter.use((req, res, next) => {
-    console.log(req.headers)
-    const token = req.body.token || req.query.token || req.headers['X-Access-Token'];
+    if (req.method != "OPTIONS") {
+      const token = req.headers['x-access-token'];
 
-    if (token) {
-      jwt.verify(token, process.env.SECRET, (err) => {
-        if (err) {
-          res.redirect("/");
-        } else {
-          next();
-        }
-      });
+      if (token) {
+        jwt.verify(token, process.env.SECRET, (err) => {
+          if (err) {
+            res.redirect("/");
+          } else {
+            next();
+          }
+        });
+      } else {
+        res.redirect("/");
+      }
     } else {
-      res.redirect("/");
+      res.send();
     }
   });
 

@@ -7,8 +7,7 @@ export default ngModule => {
       request: (config) => {
         let token = sessionService.retrieveSession();
         if (token) {
-          config.headers['X-Access-Token'] = token;
-          console.log(config)
+            config.headers['X-Access-Token'] = token;
         }
         return config;
       },

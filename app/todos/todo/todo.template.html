@@ -1,7 +1,7 @@
 <div class="todo-main">
-  <md-content>
-    <span class="task-main">{{vm.task}}</span>
-    <input type="checkbox" ng-model="vm.completed"></input>
+  <md-content flex="100" layout-align="space-between center" layout="row">
+    <input type="checkbox" ng-change="vm.todosService.updateTodoStatus(vm.todo.id)" ng-model="vm.todo.completed"/>
+    <span class="task-main">{{vm.todo.task}}</span>
+    <md-button ng-click="vm.todosService.deleteTodo(vm.todo.id)" class="md-warn md-raised">Delete</md-button>
   </md-content>
-  <md-button class="md-warning md-raised">Delete</md-button>
 </div>

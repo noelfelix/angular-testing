@@ -4,11 +4,12 @@ export default ngModule => {
   function header() {
     return {
       templateUrl: 'app/components/header/header.template.html',
-      resctrict: 'E',
+      restrict: 'E',
       scope: {
-        'title': '@'
+        title: '@'
       },
-      controller: 'headerController as vm'
+      controller: 'headerController as vm',
+      bindToController: true
     }
   }
 

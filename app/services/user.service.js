@@ -46,6 +46,7 @@ export default ngModule => {
           password: password
         }
       }).then(res => {
+        console.log(res);
         this.currentUser = this.sessionService.getCurrentSessionUser();
         this.$state.go('todos', {
           todos: res.data.todos

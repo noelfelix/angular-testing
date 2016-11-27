@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export default ngModule => {
   let providerName = 'todosService';
 
@@ -10,8 +12,8 @@ export default ngModule => {
 
       this.todosEndpoint = CONSTANTS.TODOS_ENDPOINT;
       this._todos = [];
-      this._completedTodos = [];
-      this._unfinishedTodos = [];
+      this.completedTodos = [];
+      this.unfinishedTodos = [];
     }
 
     set todos(todos) {
@@ -22,20 +24,9 @@ export default ngModule => {
       return this._todos;
     }
 
-    set completedTodos(todos) {
-      this._completedTodos = todos;
-    }
-
-    get completedTodos() {
-      return this._todos.filter(todo => todo.completed);
-    }
-
-    set unfinishedTodos(todos) {
-      this._unfinishedTodos = todos;
-    }
-
-    get unfinishedTodos() {
-      return this._todos.filter(todo => !todo.completed);
+    sortTodos() {
+      this.completedTodos = this.todos.filter(todo => todo.completed);
+      this.unfinishedTodos = this.todos.filter(todo => !todo.completed);
     }
 
     fetchTodos() {
@@ -44,6 +35,7 @@ export default ngModule => {
         url: `${this.CONSTANTS.TODOS_ENDPOINT}/${this.userService.currentUser}`
       }).then(res => {
         this.todos = res.data;
+        this.sortTodos();
       }, err => {
         console.error(err);
       });
@@ -59,6 +51,8 @@ export default ngModule => {
         }
       }).then(res => {
         console.log(res);
+        this.todos.push(res.data.todo);
+        this.unfinishedTodos.push(res.data.todo)
       }, err => {
         console.error(err);
       });
@@ -66,8 +60,13 @@ export default ngModule => {
 
     updateTodoStatus(id) {
       this.$http({
-        method: "UPDATE",
+        method: "PUT",
         url: `${this.CONSTANTS.TODOS_ENDPOINT}/${id}`
+      }).then(res => {
+        console.log(res);
+        this.sortTodos();
+      }, err => {
+        console.error(err);
       });
     }
 
@@ -75,7 +74,17 @@ export default ngModule => {
       this.$http({
         method: "DELETE",
         url: `${this.CONSTANTS.TODOS_ENDPOINT}/${id}`
+      }).then(res => {
+        this.removeTodo(id);
+        console.log(res);
+      }, err => {
+        console.error(err);
       });
+    }
+
+    removeTodo(id) {
+      this.todos.splice(_.findIndex(this.todos, todo => todo.id === id), 1);
+      this.sortTodos();
     }
   }
 

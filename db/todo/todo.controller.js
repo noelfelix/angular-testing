@@ -25,7 +25,7 @@ module.exports = {
     return new Promise((res, rej) => {
       db.Todo.update(status, {where: {id: id}})
         .then(data => {
-          res.status(204).send();
+          res(data);
         }, err => {
           rej(err);
         });
@@ -35,7 +35,7 @@ module.exports = {
     return new Promise((res, rej) => {
       db.Todo.destroy({where: {id: id}})
         .then(data => {
-          res.status(204).send();
+          res(data);
         }, err => {
           rej(err);
         });
