@@ -5,9 +5,6 @@ export default ngModule => {
     constructor($stateParams, todosService) {
       this.$stateParams = $stateParams;
       this.todosService = todosService;
-      this.newTodoItem = {
-        task: ""
-      };
 
       if (this.$stateParams.todos) {
         this.todosService.todos = this.$stateParams.todos;

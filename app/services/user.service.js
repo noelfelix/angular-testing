@@ -10,7 +10,6 @@ export default ngModule => {
       this.sessionService = sessionService;
 
       this.currentUser;
-      this.userEndpoint = CONSTANTS.USER_ENDPOINT;
 
       if(this.sessionService.isAuthenticated()) {
         this.currentUser = this.sessionService.getCurrentSessionUser();
@@ -18,13 +17,10 @@ export default ngModule => {
       }
     }
 
-    onInitialLoad() {
-    }
-
     register(username, password) {
       this.$http({
         method: 'POST',
-        url: this.userEndpoint,
+        url: this.CONSTANTS.USER_ENDPOINT,
         data: {
           username: username,
           password: password
@@ -41,7 +37,7 @@ export default ngModule => {
     login(username, password) {
       this.$http({
         method: 'POST',
-        url: `${this.userEndpoint}/${username}`,
+        url: `${this.CONSTANTS.USER_ENDPOINT}/${username}`,
         data: {
           password: password
         }

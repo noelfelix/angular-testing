@@ -10,7 +10,6 @@ export default ngModule => {
       this.CONSTANTS = CONSTANTS;
       this.userService = userService;
 
-      this.todosEndpoint = CONSTANTS.TODOS_ENDPOINT;
       this._todos = [];
       this.completedTodos = [];
       this.unfinishedTodos = [];
@@ -34,6 +33,7 @@ export default ngModule => {
         method: "GET",
         url: `${this.CONSTANTS.TODOS_ENDPOINT}/${this.userService.currentUser}`
       }).then(res => {
+        console.log(res);
         this.todos = res.data;
         this.sortTodos();
       }, err => {
