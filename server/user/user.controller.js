@@ -22,6 +22,7 @@ module.exports = {
   signin: (req, res) => {
     User.getUser(req.params.username, req.body.password)
       .then(data => {
+        console.log(data);
         Todo.retrieveTodos(data.username)
           .then(todos => {
             data.todos = todos;

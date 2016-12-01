@@ -1,0 +1,29 @@
+[
+  {
+    "model": "user",
+    "data": {
+      "username": "username",
+      "password": "password"
+    }
+  },
+  {
+    "model": "todo",
+    "data": {
+      "task": "Run tests before deployment.",
+      "completed": false
+    },
+    "userUsername": {
+      "username": "username"
+    }
+  },
+  {
+    "model": "todo",
+    "data": {
+      "task": "Build todo list.",
+      "completed": true
+    },
+    "userUsername": {
+      "username": "username"
+    }
+  }
+]

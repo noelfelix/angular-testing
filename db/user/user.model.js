@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
-module.exports = (sequelize) => {
-  return sequelize.define('user', {
+module.exports = sequelize => {
+  let User = sequelize.define('user', {
     username: {
       type: Sequelize.STRING,
       allowNull: false,
@@ -11,5 +11,13 @@ module.exports = (sequelize) => {
       type: Sequelize.STRING,
       allowNull: false
     }
+  }, {
+    classMethods: {
+      associate: models => {
+        User.hasMany(models.todo);
+      }
+    }
   });
+
+  return User;
 };

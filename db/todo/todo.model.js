@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = sequelize => {
   let Todo = sequelize.define('todo', {
     task: {
       type: Sequelize.STRING,
@@ -11,6 +11,18 @@ module.exports = (sequelize) => {
       allowNull: true,
       defaultValue: false
     }
+  }, {
+    classMethods: {
+      associate: models => {
+        Todo.belongsTo(models.user, {
+          onDelete: "CASCADE",
+          foreignKey: {
+            allowNull: false
+          }
+        });
+      }
+    }
   });
+
   return Todo;
 };

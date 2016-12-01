@@ -20,19 +20,19 @@ module.exports = {
                     res(createdUser.dataValues);
                   });
               }, err => {
-                console.log(err)
+                console.log(err);
                 rej(err);
               });
           }
         }, err => {
-          console.log(err)
+          console.log(err);
           rej(err);
         });
     });
   },
   getUser: (username, password) => {
     return new Promise((res, rej) => {
-      db.User.findOne({where: {username: username}})
+      db.User.findOne({where: {username: username}}, {include: [ db.Todo ]})
           .then(user => {
             if (user) {
               bcrypt.compare(password, user.password, (err, match) => {

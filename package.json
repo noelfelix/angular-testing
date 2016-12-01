@@ -26,6 +26,7 @@
     "moment": "^2.16.0",
     "node": "0.0.0",
     "sequelize": "^3.27.0",
+    "sequelize-fixtures": "^0.5.5",
     "sqlite3": "^3.1.8"
   },
   "devDependencies": {
