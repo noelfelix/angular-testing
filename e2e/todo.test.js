@@ -1,3 +1,10 @@
+/*
+* To run e2e test(s):
+* - "node server/server.js" in a terminal (replace with command to start node server)
+* - "webdriver-manager start" in another
+* - "protractor" in another
+* */
+
 describe('basicTodoLogin', () => {
 
   it('should login a user', () => {

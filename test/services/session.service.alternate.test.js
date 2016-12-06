@@ -6,8 +6,8 @@ import mockData from '../testData';
 Alternative format injects dependencies per spec.
 
 PROS:
-Is a more modular, robust testing format as each individual spec must run as though the service has just been initialized.
-Other format has changes to service persisting between tests, requiring tests be written conscious of one another and their order.
+Is a more modular, robust testing format as each individual spec runs with a fresh instantiated service.
+Other format has changes to service persisting between tests, requiring tests be written conscious of one another and test order.
 See line 62 and compare test from other for example.
 
 CONS:

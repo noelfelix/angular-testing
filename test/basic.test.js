@@ -39,15 +39,19 @@ describe('Basic testing without any Angular', () => {
         let otherName = "Jack";
 
         expect(greeter.countByName[name]).toBeUndefined();
+
         greeter.greet();
         expect(greeter.countByName[name]).toBe(1);
+
         greeter.greet();
         greeter.greet();
         expect(greeter.countByName[name]).toBe(3);
 
         expect(greeter.countByName[otherName]).toBeUndefined();
+
         greeter.greet(otherName);
         expect(greeter.countByName[otherName]).toBe(1);
+
         greeter.greet(otherName);
         greeter.greet(otherName);
         expect(greeter.countByName[otherName]).toBe(3);

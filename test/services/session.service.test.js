@@ -33,6 +33,7 @@ describe('sessionService', () => {
       }));
     });
 
+    //Inject the service we want to test
     inject(_sessionService_ => {
       sessionService = _sessionService_;
     });
