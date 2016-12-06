@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize'),
       fixtures  = require('sequelize-fixtures'),
+      helpers   = require('./helpers'),
       path      = require('path'),
       fs        = require('fs');
 
@@ -13,15 +14,20 @@ const sequelize = new Sequelize('angular-testing', null, null, {
     storage: 'angular-testing.sqlite'
 });
 
-let db = {
+const db = {
+  sequelize,
+  Sequelize,
   models: {}
 };
 
-let models = db.models;
+const models = db.models;
 
 fs.readdirSync(__dirname)
   .filter(name => fs.statSync(path.resolve(__dirname, name)).isDirectory())
-  .reduce((files, dir) => files.concat(fs.readdirSync(path.resolve(__dirname, dir)).filter(file => file.includes('.model')).map(file => `${dir}/${file}`)), [])
+  .reduce((files, dir) => files.concat(fs.readdirSync(path.resolve(__dirname, dir))
+    .filter(file => file.includes('.model'))
+    .map(file => `${dir}/${file}`)), []
+  )
   .forEach(file => {
     let model = sequelize.import(path.join(__dirname, file));
     models[model.name] = model
@@ -33,13 +39,24 @@ Object.keys(models).forEach(modelName => {
   }
 });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+//Workaround for using fixtures and bcrypt
+let password;
+helpers.hashPassword('password').then(encryptedPw => {
+  password = encryptedPw;
 
-sequelize.sync({force:true});
+  //Drop and create tables before loading fixtures
+  Promise.all(Object.keys(models).map(key => models[key].sync({force: true})))
+    .then(() => {
+      fixtures.loadFile(path.resolve(__dirname, 'fixture-data.json'), models, {
+        transformFixtureDataFn: data => {
+          if (data.password) {
+            data.password = password;
+          }
+          return data;
+        }
+      });
+  });
+});
 
-Object.keys(models).forEach(modelName => models[modelName].sync());
-
-fixtures.loadFile(path.resolve(__dirname, 'fixture-data.json'), models);
 
 module.exports = db;

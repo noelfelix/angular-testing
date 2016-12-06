@@ -30,9 +30,11 @@ module.exports = {
             data.token = jwt.sign({username: data.username}, process.env.SECRET, {expiresIn: '48h'});
             res.json(data);
           }, err => {
+            console.log(err)
             res.status(500).json(err);
           });
       }, err => {
+        console.log(err)
         err.success = false;
         err == constants.USER_NOT_FOUND_MESSAGE || err == constants.INCORRECT_PASSWORD_MESSAGE ? res.status(400).json(err) : res.status(500).json(err);
       });

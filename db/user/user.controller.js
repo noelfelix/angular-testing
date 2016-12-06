@@ -6,7 +6,7 @@ const constants = require('../../server/constants'),
 module.exports = {
   createUser: newUser => {
     return new Promise((res, rej) => {
-        db.User.findOne({where: {username: newUser.username}})
+        db.models.user.findOne({where: {username: newUser.username}})
         .then(user => {
           if (user) {
             rej(new Error(constants.USERNAME_TAKEN_ERROR_MESSAGE));
@@ -14,7 +14,7 @@ module.exports = {
             helpers.hashPassword(newUser.password)
               .then(saltedHash => {
                 newUser.password = saltedHash;
-                db.User.create(newUser)
+                db.models.user.create(newUser)
                   .then(createdUser => {
                     delete createdUser.dataValues.password;
                     res(createdUser.dataValues);
@@ -32,7 +32,7 @@ module.exports = {
   },
   getUser: (username, password) => {
     return new Promise((res, rej) => {
-      db.User.findOne({where: {username: username}}, {include: [ db.Todo ]})
+      db.models.user.findOne({where: {username: username}}, {include: [ db.models.todo ]})
           .then(user => {
             if (user) {
               bcrypt.compare(password, user.password, (err, match) => {

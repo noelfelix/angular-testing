@@ -3,7 +3,7 @@ const db = require('../db');
 module.exports = {
   createTodo: newTodo => {
     return new Promise((res, rej) => {
-      db.Todo.create(newTodo)
+      db.models.todo.create(newTodo)
         .then(createdTodo => {
           res(createdTodo.dataValues);
         }, err => {
@@ -13,7 +13,7 @@ module.exports = {
   },
   retrieveTodos: username => {
     return new Promise((res, rej) => {
-      db.Todo.findAll({where: {userUsername: username}})
+      db.models.todo.findAll({where: {userUsername: username}})
         .then(todos => {
           res(todos);
         }, err => {
@@ -23,7 +23,7 @@ module.exports = {
   },
   updateStatus: (status, id) => {
     return new Promise((res, rej) => {
-      db.Todo.update(status, {where: {id: id}})
+      db.models.todo.update(status, {where: {id: id}})
         .then(data => {
           res(data);
         }, err => {
@@ -33,7 +33,7 @@ module.exports = {
   },
   deleteTodo: id => {
     return new Promise((res, rej) => {
-      db.Todo.destroy({where: {id: id}})
+      db.models.todo.destroy({where: {id: id}})
         .then(data => {
           res(data);
         }, err => {

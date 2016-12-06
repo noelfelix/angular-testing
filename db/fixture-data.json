@@ -10,20 +10,16 @@
     "model": "todo",
     "data": {
       "task": "Run tests before deployment.",
-      "completed": false
-    },
-    "userUsername": {
-      "username": "username"
+      "completed": false,
+      "userUsername": "username"
     }
   },
   {
     "model": "todo",
     "data": {
       "task": "Build todo list.",
-      "completed": true
-    },
-    "userUsername": {
-      "username": "username"
+      "completed": true,
+      "userUsername": "username"
     }
   }
 ]
