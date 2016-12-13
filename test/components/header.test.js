@@ -49,8 +49,16 @@ describe('headerComponent', () => {
     it('logs user out on logout button click', () => {
       spyOn(controller.userService, 'logout');
       document.querySelector('#logout-button').click();
-      $scope.$apply();
       expect(controller.userService.logout).toHaveBeenCalled();
+    });
+
+    it('requires a manual digest before controller/watch changes will be reflected in template', () => {
+      //logout button has directive 'ng-if="vm.userService.currentUser"'
+      controller.userService.currentUser = undefined;
+
+      expect(document.body.querySelector('#logout-button')).not.toBe(null);
+      $scope.$apply();
+      expect(document.body.querySelector('#logout-button')).toBe(null);
     });
   });
 });

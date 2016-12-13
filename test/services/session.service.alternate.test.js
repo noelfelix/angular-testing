@@ -59,7 +59,7 @@ describe('sessionService', () => {
       expect(sessionService.retrieveSession()).toBe(validToken);
     }));
 
-    //COMPARE BELOW TEST
+    //COMPARE BELOW TEST TO OTHER SESSION.SERVICE.TEST
     it('stores the current session token on the service', inject(sessionService => {
       sessionService.storeSession(validToken);
       expect(sessionService.currentSessionToken).toBe(validToken);

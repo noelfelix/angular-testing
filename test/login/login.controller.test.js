@@ -2,7 +2,7 @@ import angular from 'angular';
 import 'angular-mocks'
 
 describe('loginController', () => {
-  let $controller, $scope, $rootScope, controller, userService;
+  let $controller, $scope, $rootScope, controller;
 
   beforeEach(() => {
     //Create a mock version of our Angular application to be used for testing

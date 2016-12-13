@@ -1,3 +1,5 @@
+//Basic non-angular example exercising some of the functionality displayed in jasmine.test.js
+
 import testData from './testData';
 
 describe('Basic testing without any Angular', () => {
