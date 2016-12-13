@@ -12,7 +12,7 @@ See line 62 and compare test from other for example.
 
 CONS:
 Redundancy in writing tests (above and beyond repeatedly injecting the same dependencies).
-If testing various points in a complex action, each test would need to build up to the test state manually.
+If testing various points in a complex action/series of sequential and dependent actions, each test would need to build up to the test state manually.
  */
 
 describe('sessionService', () => {

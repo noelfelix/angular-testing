@@ -61,7 +61,8 @@ describe('userService', () => {
 
         /*
         Below preps next test
-        Only justify this approach based on would be backend and interceptor tests (as well as our sessionService tests)
+        Only justify this approach based on (would be) backend, interceptor, and sessionService tests.
+        Promotes modularity/concerns and reduces redundancy.
          */
         authenticated = true;
       }));

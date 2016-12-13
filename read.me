@@ -1,0 +1,61 @@
+Installation:
+
+- npm install
+- npm install -g protractor
+- webdriver-manager update
+
+Karma tests:
+
+- karma start
+
+E2E tests:
+- Requires terminals A, B, and C
+
+*Serve app in one terminal*
+Terminal A: - node server/server.js
+
+*Start Selenium server in another*
+Terminal B: - webdriver-manager start
+
+*Run tests in another*
+Terminal C: - protractor
+
+
+Test review order:
+
+1. test/jasmine.test.js
+  - Introduces jasmine framework functionality
+  - Covered more in depth at jasmine.github.io/2.0/introduction.html
+
+2. test/basic.test.js
+  - Shows basic set of tests for an imported class
+  - Introduces importing mock data/dependencies
+
+3. test/login/login.controller.test.js
+  - Basic dependencies/layout for Angular test
+  - Introduces injection
+  - Highlights basic controller test framework
+
+4. test/services/session.service.test.js
+  - Introduces mocking services
+  - Shows what testing a service could look like
+  - Test progression, building on existing tests
+
+4a. test/services/session.service.alternate.test.js
+  - Highlights differences in injecting per spec and pros/cons
+
+5. test/services/user.service.test.js
+  - Introduces mocking backend/http activity
+  - Highlights format with nested describes based on functionality, not specific methods/properties
+
+6. test/components/header.test.js
+  - Basic directive testing
+  - Highlights basic directive/template test framework (compile, etc...)
+  - Introduces mocking user interactions
+  - Highlights need to manually trigger digest cycle
+  - Shows the limits of jasmine unit testing and segues into end-to-end
+
+7. Basic E2E example (see directions above, or in file e2e/todo.test.js)
+  - Compare with complexity and maximum mocking required for directive testing
+  - Not a substitute for testing directive controller functionality
+  - Directive interaction testing with jasmine can be more a test of ng-* directives and possibly redundant

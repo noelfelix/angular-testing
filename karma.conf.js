@@ -32,19 +32,12 @@ module.exports = function(config) {
       'app/**/*.html': ['ng-html2js']
     },
 
-    // babelPreprocessor: {
-    //   options: {
-    //     presets: ['es2015'],
-    //     sourceMap: 'inline'
-    //   }
-    // },
-
     browserify: {
       debug: true,
       transform: [ ['babelify', { presets: ['es2015'] } ] ]
     },
 
-    //Strip prefix is used to match up path from tst init and templateUrl in directives
+    //Strip prefix is used to match up path from test init and templateUrl in directives
     ngHtml2JsPreprocessor: {
       moduleName: 'templates',
       stripPrefix: '/'
